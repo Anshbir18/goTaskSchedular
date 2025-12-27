@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package task;
+
+option go_package = "./internal/rpc/taskpb";
+
+import "google/protobuf/timestamp.proto";
+
+message Task{
+    int64 id = 1;
+    string name = 2;
+    string payload = 3;
+    string status = 4;
+
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+
+    int32 attempts = 7;
+    int32 max_attempts = 8;
+
+    string last_error = 9;
+    string result = 10;
+
+}
+
+message CreateTaskRequest{
+    string name = 1;
+    string payload = 2;
+    google.protobuf.Timestamp scheduled_at = 3;
+    int32 max_attempts = 4;
+}
+
+message GetTaskRequest {
+  int64 id = 1;
+}
+
+message GetTaskResponse {
+  Task task = 1;
+}
+
+message FetchDueTasksRequest {
+  google.protobuf.Timestamp now = 1;
+}
+
+
+message FetchDueTasksResponse {
+  repeated Task tasks = 1;
+}
+
+message UpdateTaskStatusRequest {
+  int64 id = 1;
+  string status = 2;
+  string result = 3;
+  string last_error = 4;
+}
+
+service TaskService {
+  rpc CreateTask(CreateTaskRequest) returns (Task);
+  rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
+  rpc FetchDueTasks(FetchDueTasksRequest) returns (FetchDueTasksResponse);
+  rpc UpdateTaskStatus(UpdateTaskStatusRequest) returns (Task);
+}
