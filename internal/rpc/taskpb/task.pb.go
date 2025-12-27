@@ -140,9 +140,9 @@ func (x *Task) GetResult() string {
 
 type CreateTaskRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	Payload       string                 `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
-	ScheduledAt   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=scheduled_at,json=scheduledAt,proto3" json:"scheduled_at,omitempty"`
+	ExecuteAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=execute_at,json=executeAt,proto3" json:"execute_at,omitempty"`
 	MaxAttempts   int32                  `protobuf:"varint,4,opt,name=max_attempts,json=maxAttempts,proto3" json:"max_attempts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -178,9 +178,9 @@ func (*CreateTaskRequest) Descriptor() ([]byte, []int) {
 	return file_proto_task_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateTaskRequest) GetName() string {
+func (x *CreateTaskRequest) GetType() string {
 	if x != nil {
-		return x.Name
+		return x.Type
 	}
 	return ""
 }
@@ -192,9 +192,9 @@ func (x *CreateTaskRequest) GetPayload() string {
 	return ""
 }
 
-func (x *CreateTaskRequest) GetScheduledAt() *timestamppb.Timestamp {
+func (x *CreateTaskRequest) GetExecuteAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ScheduledAt
+		return x.ExecuteAt
 	}
 	return nil
 }
@@ -469,11 +469,12 @@ const file_proto_task_proto_rawDesc = "" +
 	"\n" +
 	"last_error\x18\t \x01(\tR\tlastError\x12\x16\n" +
 	"\x06result\x18\n" +
-	" \x01(\tR\x06result\"\xa3\x01\n" +
+	" \x01(\tR\x06result\"\x9f\x01\n" +
 	"\x11CreateTaskRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\apayload\x18\x02 \x01(\tR\apayload\x12=\n" +
-	"\fscheduled_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vscheduledAt\x12!\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x18\n" +
+	"\apayload\x18\x02 \x01(\tR\apayload\x129\n" +
+	"\n" +
+	"execute_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\texecuteAt\x12!\n" +
 	"\fmax_attempts\x18\x04 \x01(\x05R\vmaxAttempts\" \n" +
 	"\x0eGetTaskRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"1\n" +
@@ -526,7 +527,7 @@ var file_proto_task_proto_goTypes = []any{
 var file_proto_task_proto_depIdxs = []int32{
 	7,  // 0: task.Task.created_at:type_name -> google.protobuf.Timestamp
 	7,  // 1: task.Task.updated_at:type_name -> google.protobuf.Timestamp
-	7,  // 2: task.CreateTaskRequest.scheduled_at:type_name -> google.protobuf.Timestamp
+	7,  // 2: task.CreateTaskRequest.execute_at:type_name -> google.protobuf.Timestamp
 	0,  // 3: task.GetTaskResponse.task:type_name -> task.Task
 	7,  // 4: task.FetchDueTasksRequest.now:type_name -> google.protobuf.Timestamp
 	0,  // 5: task.FetchDueTasksResponse.tasks:type_name -> task.Task
